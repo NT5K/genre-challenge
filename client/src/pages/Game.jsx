@@ -24,8 +24,9 @@ const Game = () => {
 
     const fetchMovie = async () => {
         try {
-            // const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
-            const response = await axios.get(`movie?title=${movieTitle}`);
+            const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
+            console.log(apiUrl)
+            const response = await axios.get(`${apiUrl}/movie?title=${movieTitle}`);
             if (response.data.Response === 'False') {
                 setMovieData(null);
                 setErrorMessage(response.data.Error);
