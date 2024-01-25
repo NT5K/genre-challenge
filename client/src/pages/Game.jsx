@@ -26,7 +26,7 @@ const Game = () => {
         try {
             const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
             console.log(apiUrl)
-            const response = await axios.get(`${apiUrl}/movie?title=${movieTitle}`);
+            const response = await axios.get(`https://genre-challenge-demo-dvijshjgk-nt5k.vercel.app/movie?title=${movieTitle}`);
             if (response.data.Response === 'False') {
                 setMovieData(null);
                 setErrorMessage(response.data.Error);
