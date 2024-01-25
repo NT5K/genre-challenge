@@ -7,7 +7,7 @@ dotenv.config();
 const app = express();
 const PORT = 3001;
 const corsOptions = {
-  origin: 'https://genre-challenge-demo1-4r35zmhbg-nt5k.vercel.app/', // Replace with your client's domain
+  origin: 'http://localhost:5173', // Replace with your client's domain
   optionsSuccessStatus: 200
 };
 
