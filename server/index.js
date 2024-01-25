@@ -6,7 +6,12 @@ import dotenv from 'dotenv';
 dotenv.config();
 const app = express();
 const PORT = 3001;
-app.use(cors());
+const corsOptions = {
+  origin: 'https://genre-challenge-demo1-4r35zmhbg-nt5k.vercel.app/', // Replace with your client's domain
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 
