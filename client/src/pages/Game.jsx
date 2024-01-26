@@ -7,7 +7,9 @@ import MovieDisplay from '../components/MovieDisplay';
 import SelectedMovies from '../components/SelectedMovies';
 import ScoreDisplay from '../components/ScoreDisplay';
 
+// Main game component
 const Game = () => {
+    // State hooks for various features of the game
     const [isGenreMatch, setIsGenreMatch] = useState(false);
     const [selectedGenre, setSelectedGenre] = useState('');
 
@@ -22,11 +24,10 @@ const Game = () => {
     const [showSubmitButton, setShowSubmitButton] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
 
+    // Function to fetch movie data from an API
     const fetchMovie = async () => {
         try {
             const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
-            console.log(apiUrl)
-            console.log(`${apiUrl}/movie?title=${movieTitle}`, "full url")
             const response = await axios.get(`${apiUrl}/movie?title=${movieTitle}`);
             if (response.data.Response === 'False') {
                 setMovieData(null);
@@ -41,6 +42,7 @@ const Game = () => {
         }
     };
 
+    // Function to handle adding a movie to the selection
     const handleAddMovie = () => {
         if (movieData && movieData.Genre.split(', ').includes(selectedGenre)) {
             if (selectedMovies.length >= 2) {
@@ -54,6 +56,7 @@ const Game = () => {
         }
     };
 
+    // Function to reset the game state
     const resetGame = (e) => {
         e.preventDefault();
         setSelectedMovies([]);
@@ -66,6 +69,7 @@ const Game = () => {
         setShowSubmitButton(true);
     };
 
+    // Effect hook to update score and its display based on selected movies
     useEffect(() => {
         if (selectedMovies.length === 2) {
             setShowScore(true);
@@ -85,6 +89,7 @@ const Game = () => {
         }
     }, [selectedMovies]);
 
+    // Effect hook to check if the fetched movie matches the selected genre
     useEffect(() => {
         if (movieData) {
             const match = selectedGenre && movieData && movieData.Genre.split(',').map(genre => genre.trim().toLowerCase()).includes(selectedGenre.trim().toLowerCase());
@@ -92,6 +97,7 @@ const Game = () => {
         }
     }, [movieData, selectedGenre]);
 
+    // Rendering the game interface
     return (
         <div className="container-fluid vh-100 p-1 p-md-5">
             <div className="row flex-grow-1">
@@ -103,7 +109,6 @@ const Game = () => {
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-12">
-
                                     <p className="card-text text-center">
                                         To play the game, start by selecting a movie genre from the dropdown below. Then, search for two movies within the selected genre. Your goal is to choose movies whose combined IMDb ratings total as close to 10/10 as possible without going over. Good luck! You can{' '}
                                         <a href="#" onClick={resetGame}>
@@ -116,6 +121,7 @@ const Game = () => {
                                     <hr />
                                 </div>
                                 <div className="col-md-6">
+                                    {/* Components for selecting genre, searching movies, and displaying score */}
                                     <GenreSelector genres={genres} selectedGenre={selectedGenre} setSelectedGenre={setSelectedGenre} />
                                     {selectedGenre && (
                                         <div>
@@ -135,6 +141,7 @@ const Game = () => {
                                     )}
                                 </div>
                                 <div className="col-md-6">
+                                    {/* Component to display movie details and add movie button */}
                                     <MovieDisplay movieData={movieData} handleAddMovie={handleAddMovie} showSubmitButton={showSubmitButton} isGenreMatch={isGenreMatch} />
                                 </div>
                             </div>
