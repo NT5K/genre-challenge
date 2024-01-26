@@ -5,7 +5,6 @@ import no_poster from '../assets/images/no_poster.png';
 const MovieDisplay = ({ movieData, handleAddMovie, showSubmitButton, isGenreMatch }) => (
     <div className="row">
         <div className={`col-12 ${movieData === null ? 'col-md-12' : 'col-md-6'}`}>
-
             <div className="text-center">
                 {movieData === null ? (
                     <img src={logo} alt='logo' className="img-fluid" style={{ maxHeight: '500px' }} />

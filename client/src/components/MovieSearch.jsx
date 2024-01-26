@@ -14,7 +14,6 @@ const MovieSearch = ({ movieTitle, setMovieTitle, fetchMovie, errorMessage }) =>
             <button className="btn btn-secondary" onClick={fetchMovie}>Search Movie</button>
         </div>
         {errorMessage && <div className="alert alert-danger" role="alert">{errorMessage}</div>}
-
     </div>
 );
 
